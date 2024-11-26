@@ -14,7 +14,7 @@ export default function Login() {
 
   return (
     <div className="flex items-center justify-center min-h-screen relative">
-      <div className="max-w-md w-full">
+      <div className="max-w-md w-full -mt-52">
         <div className="flex flex-col gap-2 items-center mb-4">
           <span className="text-4xl">🔮</span>
         </div>
