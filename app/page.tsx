@@ -1,25 +1,24 @@
+'use client';
+
 import FormButton from '@/components/form-btn';
 import FormInput from '@/components/form-input';
+import { handleForm } from './actions';
+import { useFormState } from 'react-dom';
 import { UserEmail, UserIcon, UserPassword } from '@/components/user-icon';
 
 export default function Login() {
-  async function handleForm(formData: FormData) {
-    'use server';
-    console.log(
-      formData.get('email'),
-      formData.get('username'),
-      formData.get('password')
-    );
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-    console.log('logged in!');
-  }
+  const [state, action] = useFormState(handleForm, {
+    errors: [],
+    success: false,
+  });
+
   return (
-    <div className="flex items-center justify-center min-h-screen ">
+    <div className="flex items-center justify-center min-h-screen relative">
       <div className="max-w-md w-full">
         <div className="flex flex-col gap-2 items-center mb-4">
           <span className="text-4xl">🔮</span>
         </div>
-        <form action={handleForm} className="flex flex-col gap-3">
+        <form action={action} className="flex flex-col gap-3">
           <FormInput
             name="email"
             type="email"
@@ -41,10 +40,17 @@ export default function Login() {
             type="password"
             placeholder="Password"
             required
-            errors={[]}
+            errors={state.errors}
             icon={<UserPassword />}
           />
           <FormButton text="Log In" />
+          {state.success && (
+            <div className="text-center mb-4">
+              <div className="inline-block px-4 py-2 font-semibold text-[#a399f1]">
+                Welcome back! 👍
+              </div>
+            </div>
+          )}
         </form>
       </div>
     </div>
