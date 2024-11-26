@@ -10,7 +10,8 @@ export default function Login() {
       formData.get('username'),
       formData.get('password')
     );
-    console.log('i run in the server baby!');
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+    console.log('logged in!');
   }
   return (
     <div className="flex items-center justify-center min-h-screen ">
@@ -43,7 +44,7 @@ export default function Login() {
             errors={[]}
             icon={<UserPassword />}
           />
-          <FormButton loading={false} text="Log In" />
+          <FormButton text="Log In" />
         </form>
       </div>
     </div>
