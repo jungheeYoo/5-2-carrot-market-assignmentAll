@@ -7,10 +7,7 @@ import { useFormState } from 'react-dom';
 import { UserEmail, UserIcon, UserPassword } from '@/components/user-icon';
 
 export default function Login() {
-  const [state, action] = useFormState(handleForm, {
-    errors: [],
-    success: false,
-  });
+  const [state, action] = useFormState(handleForm, null);
 
   return (
     <div className="flex items-center justify-center min-h-screen relative">
@@ -44,7 +41,7 @@ export default function Login() {
             icon={<UserPassword />}
           />
           <FormButton text="Log In" />
-          {state.success && (
+          {state === undefined && (
             <div className="text-center mb-4">
               <div className="inline-block px-4 py-2 font-semibold text-[#a399f1]">
                 Welcome back! 👍
