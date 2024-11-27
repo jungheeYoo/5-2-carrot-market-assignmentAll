@@ -4,7 +4,7 @@ interface FormInputProps {
   type: string;
   placeholder: string;
   required: boolean;
-  errors: string[];
+  errors?: string[];
   icon?: ReactNode;
   name: string;
 }
@@ -13,7 +13,7 @@ export default function FormInput({
   type,
   placeholder,
   required,
-  errors,
+  errors = [],
   icon,
   name,
 }: FormInputProps) {
