@@ -40,7 +40,7 @@ export default function Login() {
             type="password"
             placeholder="Password"
             required
-            errors={state.errors}
+            errors={[]}
             icon={<UserPassword />}
           />
           <FormButton text="Log In" />
