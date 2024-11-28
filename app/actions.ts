@@ -9,7 +9,7 @@ import {
   PASSWORD_MIN_LENGTH_ERROR,
   PASSWORD_REGEX,
   PASSWORD_REGEX_ERROR,
-} from './lib/constants';
+} from '../lib/constants';
 
 const checkEmail = (email: string) => email.includes('@zod.com');
 
