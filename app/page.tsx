@@ -5,6 +5,7 @@ import FormInput from '@/components/form-input';
 import { handleForm } from './actions';
 import { useFormState } from 'react-dom';
 import { UserEmail, UserIcon, UserPassword } from '@/components/user-icon';
+// import '@/lib/db';
 
 export default function Login() {
   const [state, action] = useFormState(handleForm, null);
