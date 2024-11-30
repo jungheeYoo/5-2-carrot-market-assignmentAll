@@ -1,6 +1,7 @@
 'use server';
 
 import { z } from 'zod';
+import db from '@/lib/db';
 import {
   EMAIL_DOMAIN_VALIDATION_MESSAGE,
   NAME_MIN_LENGTH,
@@ -20,18 +21,48 @@ const checkPasswords = ({
   confirm_password: string;
 }) => password === confirm_password;
 
+const checkUniqueUsername = async (username: string) => {
+  const user = await db.user.findUnique({
+    where: {
+      username: username,
+    },
+    select: {
+      id: true,
+    },
+  });
+  console.log(user);
+  return !Boolean(user);
+};
+
+const checkUniqueEmail = async (email: string) => {
+  const user = await db.user.findUnique({
+    where: {
+      email: email,
+    },
+    select: {
+      id: true,
+    },
+  });
+  return Boolean(user) === false;
+};
+
 const formSchema = z
   .object({
     email: z
       .string()
       .email()
       .trim()
-      .refine(checkEmail, EMAIL_DOMAIN_VALIDATION_MESSAGE),
+      .refine(checkEmail, EMAIL_DOMAIN_VALIDATION_MESSAGE)
+      .refine(
+        checkUniqueEmail,
+        'This email is already registered with an account.'
+      ),
     username: z
       .string()
       .trim()
       .toLowerCase()
-      .min(NAME_MIN_LENGTH, NAME_MIN_LENGTH_ERROR),
+      .min(NAME_MIN_LENGTH, NAME_MIN_LENGTH_ERROR)
+      .refine(checkUniqueUsername, 'This username already exists.'),
     password: z
       .string()
       .min(PASSWORD_MIN_LENGTH, PASSWORD_MIN_LENGTH_ERROR)
@@ -39,7 +70,7 @@ const formSchema = z
     confirm_password: z.string().min(PASSWORD_MIN_LENGTH),
   })
   .refine(checkPasswords, {
-    message: 'Both passwords should be the same!',
+    message: 'Please ensure both passwords are the same.',
     path: ['confirm_password'],
   });
 
@@ -51,7 +82,7 @@ export async function createAccount(prevState: any, formData: FormData) {
     confirm_password: formData.get('confirm_password'),
   };
 
-  const result = formSchema.safeParse(data);
+  const result = await formSchema.safeParseAsync(data);
   console.log(result);
   if (!result.success) {
     return result.error.flatten();
