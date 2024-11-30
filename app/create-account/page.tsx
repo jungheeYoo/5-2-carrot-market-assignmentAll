@@ -8,7 +8,7 @@ import { UserEmail, UserIcon, UserPassword } from '@/components/user-icon';
 // import '@/lib/db';
 
 export default function CreateAccount() {
-  const [state, action] = useFormState(createAccount, null);
+  const [state, dispatch] = useFormState(createAccount, null);
 
   return (
     <div className="flex items-center justify-center min-h-screen relative">
@@ -16,7 +16,7 @@ export default function CreateAccount() {
         <div className="flex flex-col gap-2 mb-5 *:font-medium text-center">
           <h1 className="text-xl">Fill in the form below to join!</h1>
         </div>
-        <form action={action} className="flex flex-col gap-3">
+        <form action={dispatch} className="flex flex-col gap-3">
           <FormInput
             name="email"
             type="email"
