@@ -2,13 +2,13 @@
 
 import FormButton from '@/components/form-btn';
 import FormInput from '@/components/form-input';
-import { handleForm } from './actions';
+import { login } from './actions';
 import { useFormState } from 'react-dom';
 import { UserEmail, UserIcon, UserPassword } from '@/components/user-icon';
 // import '@/lib/db';
 
 export default function Login() {
-  const [state, action] = useFormState(handleForm, null);
+  const [state, action] = useFormState(login, null);
 
   return (
     <div className="flex items-center justify-center min-h-screen relative">
@@ -24,14 +24,6 @@ export default function Login() {
             required
             errors={state?.fieldErrors?.email ?? []}
             icon={<UserEmail />}
-          />
-          <FormInput
-            name="username"
-            type="text"
-            placeholder="Username"
-            required
-            errors={state?.fieldErrors?.username ?? []}
-            icon={<UserIcon />}
           />
           <FormInput
             name="password"

@@ -3,13 +3,14 @@
 import { z } from 'zod';
 import db from '@/lib/db';
 import bcrypt from 'bcrypt';
-import { getIronSession } from 'iron-session';
-import { cookies } from 'next/headers';
+import getSession from '@/lib/session';
 import { redirect } from 'next/navigation';
 import {
   EMAIL_DOMAIN_VALIDATION_MESSAGE,
+  NAME_CHECK_ERROR,
   NAME_MIN_LENGTH,
   NAME_MIN_LENGTH_ERROR,
+  PASSWORD_CONFIRM_ERROR,
   PASSWORD_MIN_LENGTH,
   PASSWORD_MIN_LENGTH_ERROR,
   PASSWORD_REGEX,
@@ -25,6 +26,18 @@ const checkPasswords = ({
   confirm_password: string;
 }) => password === confirm_password;
 
+const checkUniqueEmail = async (email: string) => {
+  const user = await db.user.findUnique({
+    where: {
+      email: email,
+    },
+    select: {
+      id: true,
+    },
+  });
+  return Boolean(user) === false;
+};
+
 const checkUniqueUsername = async (username: string) => {
   const user = await db.user.findUnique({
     where: {
@@ -36,18 +49,6 @@ const checkUniqueUsername = async (username: string) => {
   });
   console.log(user);
   return !Boolean(user);
-};
-
-const checkUniqueEmail = async (email: string) => {
-  const user = await db.user.findUnique({
-    where: {
-      email: email,
-    },
-    select: {
-      id: true,
-    },
-  });
-  return Boolean(user) === false;
 };
 
 const formSchema = z
@@ -66,7 +67,7 @@ const formSchema = z
       .trim()
       .toLowerCase()
       .min(NAME_MIN_LENGTH, NAME_MIN_LENGTH_ERROR)
-      .refine(checkUniqueUsername, 'This username already exists.'),
+      .refine(checkUniqueUsername, NAME_CHECK_ERROR),
     password: z
       .string()
       .min(PASSWORD_MIN_LENGTH, PASSWORD_MIN_LENGTH_ERROR)
@@ -74,7 +75,7 @@ const formSchema = z
     confirm_password: z.string().min(PASSWORD_MIN_LENGTH),
   })
   .refine(checkPasswords, {
-    message: 'Please ensure both passwords are the same.',
+    message: PASSWORD_CONFIRM_ERROR,
     path: ['confirm_password'],
   });
 
@@ -106,13 +107,10 @@ export async function createAccount(prevState: any, formData: FormData) {
     });
     console.log(user);
 
-    const cookie = await getIronSession(cookies(), {
-      cookieName: 'carrot-market-assignment',
-      password: process.env.COOKIE_PASSWORD!,
-    });
-    //@ts-ignore
-    cookie.id = user.id;
-    await cookie.save();
+    const session = await getSession();
+
+    session.id = user.id;
+    await session.save();
     redirect('/profile');
   }
 }
