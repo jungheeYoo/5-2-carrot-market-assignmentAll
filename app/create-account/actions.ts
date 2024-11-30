@@ -3,6 +3,9 @@
 import { z } from 'zod';
 import db from '@/lib/db';
 import bcrypt from 'bcrypt';
+import { getIronSession } from 'iron-session';
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 import {
   EMAIL_DOMAIN_VALIDATION_MESSAGE,
   NAME_MIN_LENGTH,
@@ -102,5 +105,14 @@ export async function createAccount(prevState: any, formData: FormData) {
       },
     });
     console.log(user);
+
+    const cookie = await getIronSession(cookies(), {
+      cookieName: 'carrot-market-assignment',
+      password: process.env.COOKIE_PASSWORD!,
+    });
+    //@ts-ignore
+    cookie.id = user.id;
+    await cookie.save();
+    redirect('/profile');
   }
 }
