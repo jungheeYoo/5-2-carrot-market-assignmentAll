@@ -2,6 +2,7 @@
 
 import { z } from 'zod';
 import db from '@/lib/db';
+import bcrypt from 'bcrypt';
 import {
   EMAIL_DOMAIN_VALIDATION_MESSAGE,
   NAME_MIN_LENGTH,
@@ -87,6 +88,19 @@ export async function createAccount(prevState: any, formData: FormData) {
   if (!result.success) {
     return result.error.flatten();
   } else {
-    console.log(result.data);
+    const hashedPassword = await bcrypt.hash(result.data.password, 12);
+    console.log(hashedPassword);
+
+    const user = await db.user.create({
+      data: {
+        email: result.data.email,
+        username: result.data.username,
+        password: hashedPassword,
+      },
+      select: {
+        id: true,
+      },
+    });
+    console.log(user);
   }
 }
