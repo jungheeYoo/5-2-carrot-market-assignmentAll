@@ -8,10 +8,9 @@ import { redirect } from 'next/navigation';
 import {
   NAME_MIN_LENGTH,
   NAME_MIN_LENGTH_ERROR,
-  PASSWORD_CONFIRM_ERROR,
   PASSWORD_MIN_LENGTH,
   PASSWORD_MIN_LENGTH_ERROR,
-} from '../../lib/constants';
+} from '../../../lib/constants';
 
 const checkPasswords = ({
   password,
@@ -107,6 +106,6 @@ export async function createAccount(prevState: any, formData: FormData) {
 
     session.id = user.id;
     await session.save();
-    redirect('/profile');
+    redirect('/');
   }
 }

@@ -8,7 +8,7 @@ import { redirect } from 'next/navigation';
 import {
   EMAIL_DOMAIN_VALIDATION_MESSAGE,
   EMAIL_EXISTS_ERROR,
-} from '../../lib/constants';
+} from '../../../lib/constants';
 
 const checkEmail = (email: string) => email.includes('@zod.com');
 const checkEmailExists = async (email: string) => {
@@ -62,7 +62,7 @@ export async function login(prevState: any, formData: FormData) {
       const session = await getSession();
       session.id = user!.id;
       await session.save();
-      redirect('/profile');
+      redirect('/');
     } else {
       return {
         fieldErrors: {
