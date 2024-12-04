@@ -2,13 +2,14 @@ import db from '@/lib/db';
 import { notFound } from 'next/navigation';
 
 async function getTweet(id: number) {
-  await new Promise((resolve) => setTimeout(resolve, 10000));
+  // await new Promise((resolve) => setTimeout(resolve, 10000));
   const tweet = await db.tweet.findUnique({
     where: {
       id,
     },
     select: {
       id: true,
+      tweet: true,
       created_at: true,
       updated_at: true,
       user: {
@@ -38,10 +39,11 @@ export default async function TweetPostDetail({
 
   return (
     <div>
-      <div className="p-5 flex items-center gap-3 border-b border-neutral-700">
-        <div>
-          <h3>{tweet.user.username}</h3>
-        </div>
+      <div>
+        <h3 className="p-5 flex items-center gap-3 border-b border-neutral-700">
+          {tweet.user.username}
+        </h3>
+        <p className="p-5 ">{tweet.tweet}</p>
       </div>
     </div>
   );
