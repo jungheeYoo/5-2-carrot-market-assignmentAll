@@ -2,7 +2,7 @@
 
 import { uploadTweet } from '@/app/tweets/add/actions';
 import { useFormState } from 'react-dom';
-import FormButton from './form-btn';
+import FormButton from '../../../components/form-btn';
 
 export default function AddTweet() {
   const [state, dispatch] = useFormState(uploadTweet, null);

@@ -3,7 +3,7 @@
 import { InitialTweets } from '@/app/(tabs)/page';
 import { useState } from 'react';
 import getMoreTweets from '@/app/(tabs)/actions';
-import TweetPostItem from './tweet-post-item';
+import TweetPostItem from './tweet-post';
 
 interface TweetPostListProps {
   initialTweets: InitialTweets;

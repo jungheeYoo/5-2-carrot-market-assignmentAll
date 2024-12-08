@@ -18,14 +18,12 @@ export default function TweetPostItem({
 }: TweetPostItemProps) {
   return (
     <li className="w-full">
-      <Link
-        href={`/tweets/${id}`}
-        className="flex gap-5 border-b-gray-500 border-b-[1px] pb-4"
-      >
-        <div className="bg-gray-500 size-28 rounded-md" />
-        <div className="flex flex-col gap-2 ">
+      <Link href={`/tweets/${id}`} className="flex gap-6">
+        <div className="flex gap-4 ">
           <h4>{username}</h4>
-          <span>{formatToTimeAgo(created_at.toString())}</span>
+          <span className="text-sm text-neutral-500">
+            {formatToTimeAgo(created_at.toString())}
+          </span>
         </div>
       </Link>
     </li>

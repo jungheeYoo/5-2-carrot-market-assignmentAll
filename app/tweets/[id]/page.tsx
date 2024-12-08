@@ -3,6 +3,7 @@ import getSession from '@/lib/session';
 import { notFound } from 'next/navigation';
 import { unstable_cache as nextCache } from 'next/cache';
 import LikeButton from '@/components/tweet-like-button';
+import TweetResponse from '@/components/tweet-response-list';
 
 async function getTweet(id: number) {
   // await new Promise((resolve) => setTimeout(resolve, 10000));
@@ -68,6 +69,34 @@ async function getCachedLikeStatus(tweetId: number) {
     tags: [`like-status-${tweetId}`],
   });
   return cachedOperation(tweetId, userId!);
+}
+
+async function getResponses(tweetId: number) {
+  const responses = await db.response.findMany({
+    where: {
+      tweetId,
+    },
+    select: {
+      id: true,
+      payload: true,
+      created_at: true,
+      user: {
+        select: {
+          id: true,
+          username: true,
+        },
+      },
+    },
+  });
+
+  return responses;
+}
+
+async function getCachedResponses(tweetId: number) {
+  const cachedOperation = nextCache(getResponses, ['tweet-like-status'], {
+    tags: [`like-status-${tweetId}`],
+  });
+  return cachedOperation(tweetId);
 }
 
 export default async function TweetPostDetail({
