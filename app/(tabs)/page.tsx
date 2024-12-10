@@ -1,4 +1,4 @@
-import AddTweet from '@/app/tweets/add/add-tweet';
+import AddTweet from '@/app/(tabs)/tweets/add/add-tweet';
 import TweetPostList from '@/components/tweet-post-list';
 import db from '@/lib/db';
 import { Prisma } from '@prisma/client';

@@ -3,7 +3,7 @@
 import { HandThumbUpIcon } from '@heroicons/react/24/solid';
 import { HandThumbUpIcon as OutlineHandThumbUpIcon } from '@heroicons/react/24/outline';
 import { useOptimistic } from 'react';
-import { dislikeTweet, likeTweet } from '@/app/tweets/[id]/actions';
+import { dislikeTweet, likeTweet } from '@/app/(tabs)/tweets/[id]/actions';
 import { startTransition } from 'react';
 
 interface LikeButtonProps {

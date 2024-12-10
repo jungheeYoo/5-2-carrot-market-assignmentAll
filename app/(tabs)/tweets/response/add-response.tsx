@@ -1,7 +1,7 @@
 'use client';
 
 import { useFormState } from 'react-dom';
-import FormButton from '../../../components/form-btn';
+import FormButton from '../../../../components/form-btn';
 import { addResponse } from './actions';
 
 export default function AddResponse() {
