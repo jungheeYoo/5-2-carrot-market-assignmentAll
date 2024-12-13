@@ -1,10 +1,10 @@
 'use client';
 
-import FormButton from '@/components/form-btn';
-import FormInput from '@/components/form-input';
+import FormButton from '@/components/form/form-btn';
+import FormInput from '@/components/form/form-input';
 import { login } from './actions';
 import { useFormState } from 'react-dom';
-import { UserEmail, UserPassword } from '@/components/user-icon';
+import { UserEmail, UserPassword } from '@/components/icons/user-icon';
 // import '@/lib/db';
 
 export default function Login() {

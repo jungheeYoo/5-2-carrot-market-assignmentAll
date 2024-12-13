@@ -40,7 +40,7 @@ export default function LikeButton({
   return (
     <button
       onClick={onClick}
-      className={`flex items-center gap-2 text-neutral-500 text-sm border border-neutral-500 rounded-full p-2  transition-colors ${
+      className={`flex items-center justify-center text-neutral-500 text-sm border border-neutral-500 rounded-full p-2 ml-[550px] transition-colors ${
         state.isLiked
           ? 'bg-[#d8d3ff] text-white border-[#d8d3ff]'
           : 'hover:bg-[#d8d3ff]'
@@ -52,9 +52,9 @@ export default function LikeButton({
         <OutlineHandThumbUpIcon className="size-5" />
       )}
       {state.isLiked ? (
-        <span> {state.likeCount}</span>
+        <span>{state.likeCount}</span>
       ) : (
-        <span>like ({state.likeCount})</span>
+        <span className="w-8">like</span>
       )}
     </button>
   );

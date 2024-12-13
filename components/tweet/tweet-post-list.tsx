@@ -1,9 +1,9 @@
 'use client';
 
-import { InitialTweets } from '@/app/(tabs)/page';
 import { useState } from 'react';
 import getMoreTweets from '@/app/(tabs)/actions';
 import TweetPostItem from './tweet-post';
+import { InitialTweets } from '@/lib/tweet';
 
 interface TweetPostListProps {
   initialTweets: InitialTweets;

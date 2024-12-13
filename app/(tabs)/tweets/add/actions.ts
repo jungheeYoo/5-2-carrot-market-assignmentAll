@@ -13,7 +13,7 @@ const tweetSchema = z.object({
     .max(150, 'You can enter up to 150 characters.'),
 });
 
-export async function uploadTweet(_: any, formData: FormData) {
+export async function uploadTweet(prevState: unknown, formData: FormData) {
   const data = {
     tweet: formData.get('tweet'),
   };

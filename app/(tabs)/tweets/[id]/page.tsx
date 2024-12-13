@@ -2,8 +2,8 @@ import db from '@/lib/db';
 import getSession from '@/lib/session';
 import { notFound } from 'next/navigation';
 import { unstable_cache as nextCache } from 'next/cache';
-import LikeButton from '@/components/tweet-like-button';
-import TweetResponse from '@/components/tweet-response-list';
+import LikeButton from '@/components/tweet/tweet-like-button';
+import TweetResponseList from '@/components/tweet/tweet-response-list';
 
 async function getTweet(id: number) {
   // await new Promise((resolve) => setTimeout(resolve, 10000));
@@ -37,7 +37,7 @@ async function getCachedTweet(id: number) {
   const userId = session.id;
   console.log(userId);
   const cachedOperation = nextCache(getTweet, ['tweet-detail'], {
-    tags: [`like-status-${id}`],
+    tags: [`tweet-detail-${id}`],
   });
   return cachedOperation(id);
 }
@@ -80,6 +80,7 @@ async function getResponses(tweetId: number) {
       id: true,
       payload: true,
       created_at: true,
+
       user: {
         select: {
           id: true,
@@ -88,13 +89,17 @@ async function getResponses(tweetId: number) {
       },
     },
   });
-
-  return responses;
+  const responseCount = await db.response.count({
+    where: {
+      tweetId,
+    },
+  });
+  return { responses, responseCount };
 }
 
 async function getCachedResponses(tweetId: number) {
-  const cachedOperation = nextCache(getResponses, ['tweet-like-status'], {
-    tags: [`like-status-${tweetId}`],
+  const cachedOperation = nextCache(getResponses, ['tweet-response-status'], {
+    tags: [`tweet-response-${tweetId}`],
   });
   return cachedOperation(tweetId);
 }
@@ -108,12 +113,22 @@ export default async function TweetPostDetail({
   if (isNaN(id)) {
     return notFound();
   }
+
+  const session = await getSession();
+  const sessionId = session?.id;
+
+  if (!sessionId) {
+    return notFound();
+  }
+
   const tweet = await getCachedTweet(id);
   if (!tweet) {
     return notFound();
   }
 
   const { likeCount, isLiked } = await getCachedLikeStatus(id);
+  const { responseCount, responses } = await getCachedResponses(id);
+
   return (
     <div>
       <div>
@@ -121,8 +136,13 @@ export default async function TweetPostDetail({
           {tweet.user.username}
         </h3>
         <p className="p-5 ">{tweet.tweet}</p>
-        <div className="flex flex-col gap-5 items-end">
+        <div className="flex flex-col gap-5">
           <LikeButton isLiked={isLiked} likeCount={likeCount} tweetId={id} />
+          <TweetResponseList
+            tweetId={id}
+            responses={responses}
+            responseCount={responseCount}
+          />
         </div>
       </div>
     </div>
