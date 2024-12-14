@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { unstable_cache as nextCache } from 'next/cache';
 import LikeButton from '@/components/tweet/tweet-like-button';
 import TweetResponseList from '@/components/tweet/tweet-response-list';
+import Link from 'next/link';
 
 async function getTweet(id: number) {
   // await new Promise((resolve) => setTimeout(resolve, 10000));
@@ -132,9 +133,12 @@ export default async function TweetPostDetail({
   return (
     <div>
       <div>
-        <h3 className="p-5 flex items-center gap-3 border-b border-neutral-700">
-          {tweet.user.username}
-        </h3>
+        <Link
+          href={`/users/${tweet.user.username}`}
+          className="p-5 flex items-center gap-3 border-b border-neutral-700"
+        >
+          <h3>{tweet.user.username}</h3>
+        </Link>
         <p className="p-5 ">{tweet.tweet}</p>
         <div className="flex flex-col gap-5">
           <LikeButton isLiked={isLiked} likeCount={likeCount} tweetId={id} />

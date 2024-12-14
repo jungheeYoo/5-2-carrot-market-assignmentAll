@@ -3,7 +3,7 @@ import { formatToTimeAgo } from '@/lib/utils';
 
 interface TweetPostItemProps {
   id: number;
-  tweet: string;
+  tweet: string | null;
   created_at: Date;
   updated_at: Date;
   user: {
@@ -20,7 +20,7 @@ export default function TweetPostItem({
 }: TweetPostItemProps) {
   return (
     <li className="w-full list-none">
-      <Link href={`/tweets/${id}`} className="flex gap-6">
+      <Link href={`/tweets/${id}`} className="flex gap-6 my-2">
         <div className="flex gap-4 ">
           <div className="flex flex-col text-center">
             <h4>{username}</h4>

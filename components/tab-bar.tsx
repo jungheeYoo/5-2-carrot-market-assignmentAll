@@ -13,7 +13,7 @@ import {
   UserIcon as OutlineUserIcon,
 } from '@heroicons/react/24/outline';
 
-export default function TabBar() {
+export default function TabBar({ username }: { username: string }) {
   const pathname = usePathname();
   return (
     <div className="fixed bottom-0 w-full mx-auto max-w-screen-sm grid grid-cols-3 px-3 py-3 *:text-balc bg-[#d8d3ff]">
@@ -33,13 +33,16 @@ export default function TabBar() {
         )}
         <span>search</span>
       </Link>
-      <Link href="/profile" className="flex flex-col items-center gap-px">
-        {pathname === '/profile' ? (
+      <Link
+        href={`/users/${username}`}
+        className="flex flex-col items-center gap-px"
+      >
+        {pathname === `/users/${username}` ? (
           <SolidUserIcon className="w-7 h-7" />
         ) : (
           <OutlineUserIcon className="w-7 h-7" />
         )}
-        <span>profile</span>
+        <span>user</span>
       </Link>
     </div>
   );
