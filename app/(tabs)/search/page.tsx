@@ -39,13 +39,19 @@ export default function Search() {
 
           {state?.data && (
             <ul className="mt-4">
-              {state.data.map((tweet) => (
-                <li className="py-2" key={tweet.id}>
-                  <Link href={`/tweets/${tweet.id}`}>
-                    {tweet.tweet} by {tweet.user.username}
-                  </Link>
+              {state.data.length > 0 ? (
+                state.data.map((tweet) => (
+                  <li className="py-2" key={tweet.id}>
+                    <Link href={`/tweets/${tweet.id}`}>
+                      {tweet.tweet} by {tweet.user.username}
+                    </Link>
+                  </li>
+                ))
+              ) : (
+                <li className="py-2 text-gray-500 text-center">
+                  No tweets found. Try another keyword.
                 </li>
-              ))}
+              )}
             </ul>
           )}
         </form>
