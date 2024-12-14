@@ -9,7 +9,6 @@ import {
   UserIcon,
   UserPassword,
 } from '@/components/icons/user-icon';
-// import '@/lib/db';
 
 export default function CreateAccount() {
   const [state, dispatch] = useFormState(createAccount, null);
