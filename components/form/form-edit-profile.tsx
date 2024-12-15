@@ -30,7 +30,18 @@ export default function FormEditProfile({
   );
 
   return (
-    <form action={dispatch}>
+    <form
+      action={dispatch}
+      className="flex flex-col gap-y-4 w-full max-w-lg mx-auto "
+    >
+      {state?.formErrors && state.formErrors.length > 0 && (
+        <div className="text-red-500 mb-4">
+          {state.formErrors.map((error, index) => (
+            <p key={index}>{error}</p>
+          ))}
+        </div>
+      )}
+
       <FormInput
         type="text"
         name="username"
@@ -74,19 +85,11 @@ export default function FormEditProfile({
         defaultValue={initialUserInfo.bio}
       />
 
-      {state?.formErrors && state.formErrors.length > 0 && (
-        <div className="text-red-500 mb-4">
-          {state.formErrors.map((error, index) => (
-            <p key={index}>{error}</p>
-          ))}
-        </div>
-      )}
-
       <button
         type="submit"
-        className="bg-blue-600 text-white rounded-full w-full h-12 mt-4 hover:bg-blue-700 transition"
+        className="bg-[#d8d3ff] text-white rounded-full w-full h-12 mt-4 hover:bg-[#d8d3ff94] transition"
       >
-        Update Profile
+        Modify
       </button>
     </form>
   );

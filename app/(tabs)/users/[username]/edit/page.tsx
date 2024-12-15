@@ -13,9 +13,11 @@ export default async function EditProfile({
   }
 
   return (
-    <div>
-      <h2>프로필 수정</h2>
-      <section>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50">
+      <h2>
+        <span className="font-bold text-lg">{userInfo.username}🌱</span>
+      </h2>
+      <section className="w-full max-w-md p-6 ">
         <FormEditProfile initialUserInfo={userInfo} />
       </section>
     </div>

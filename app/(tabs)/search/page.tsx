@@ -32,7 +32,7 @@ export default function Search() {
           />
           <button
             type="submit"
-            className="mt-4 bg-[#d8d3ff] text-white px-4 py-2 rounded-full"
+            className="mt-4 bg-[#d8d3ff] text-white px-4 py-2 rounded-full hover:bg-[#d8d3ff94] transition"
           >
             Search
           </button>

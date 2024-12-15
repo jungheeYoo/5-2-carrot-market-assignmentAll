@@ -18,7 +18,7 @@ export default async function User({
           {userInfo.username === user.username && (
             <Link
               href={`/users/${userInfo.username}/edit`}
-              className="p-2 border border-neutral-700 rounded-full text-sm hover:bg-[#d8d3ff] transition duration-300"
+              className="bg-[#d8d3ff] p-2 border border-neutral-700 rounded-full text-sm hover:bg-[#d8d3ff94] transition"
             >
               Edit Profile
             </Link>
