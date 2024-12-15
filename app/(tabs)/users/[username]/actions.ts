@@ -33,6 +33,7 @@ export async function getUserByUsername(username: string) {
           tweet: true,
           created_at: true,
           updated_at: true,
+          views: true,
           user: {
             select: {
               id: true,
@@ -42,6 +43,7 @@ export async function getUserByUsername(username: string) {
           _count: {
             select: {
               likes: true,
+              responses: true,
             },
           },
         },

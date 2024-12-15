@@ -8,10 +8,17 @@ export async function getInitialTweets() {
       tweet: true,
       created_at: true,
       updated_at: true,
+      views: true,
       user: {
         select: {
           id: true,
           username: true,
+        },
+      },
+      _count: {
+        select: {
+          likes: true,
+          responses: true,
         },
       },
     },
