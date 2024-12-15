@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { getLoggedInUser, getUserByUsername } from './actions';
 import TweetPostItem from '@/components/tweet/tweet-post';
+import Profile from '../../profile/page';
 
 export default async function User({
   params,
@@ -12,6 +13,9 @@ export default async function User({
 
   return (
     <div className="flex flex-col gap-5 *:w-full">
+      <section className="text-end mt-10">
+        <Profile />
+      </section>
       <section className="mt-10 p-3 border-b border-neutral-700">
         <div className="flex items-center justify-between gap-3">
           <span className="text-xl font-bold">{user.username}</span>
