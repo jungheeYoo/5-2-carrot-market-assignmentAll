@@ -39,6 +39,8 @@ export async function getResponses(tweetId: number) {
     where: {
       tweetId,
     },
+    take: 5,
+    skip: 0,
     orderBy: {
       created_at: 'desc',
     },

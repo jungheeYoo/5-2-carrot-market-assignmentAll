@@ -15,7 +15,8 @@ export async function getInitialTweets() {
         },
       },
     },
-    take: 1,
+    take: 5,
+    skip: 0,
     orderBy: {
       created_at: 'desc',
     },

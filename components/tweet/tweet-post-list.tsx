@@ -17,12 +17,16 @@ export default function TweetPostList({ initialTweets }: TweetPostListProps) {
 
   const fetchTweets = async (targetPage: number) => {
     setIsLoading(true);
-    const newTweets = await getMoreTweets(targetPage);
-
-    setTweets(newTweets);
-    setPage(targetPage);
-    setIsLoadable(newTweets.length > 0);
-    setIsLoading(false);
+    try {
+      const newTweets = await getMoreTweets(targetPage);
+      setTweets(newTweets);
+      setPage(targetPage);
+      setIsLoadable(newTweets.length === 5);
+    } catch (error) {
+      console.error('Error fetching tweets:', error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handlePrevClick = () => {

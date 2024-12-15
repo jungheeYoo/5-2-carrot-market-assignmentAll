@@ -3,6 +3,9 @@
 import db from '@/lib/db';
 
 export default async function getMoreTweets(page: number) {
+  const tweetsPerPage = 5;
+  const skip = page * tweetsPerPage;
+
   const tweets = await db.tweet.findMany({
     select: {
       id: true,
@@ -16,8 +19,8 @@ export default async function getMoreTweets(page: number) {
         },
       },
     },
-    skip: page * 1,
-    take: 1,
+    take: tweetsPerPage,
+    skip: skip,
     orderBy: {
       created_at: 'desc',
     },

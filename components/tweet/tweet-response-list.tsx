@@ -9,6 +9,10 @@ interface TweetResponseListProps {
   tweetId: number;
   responses: ResponseType[];
   responseCount: number;
+  currentUser: {
+    id: number;
+    username: string;
+  };
 }
 
 type NewResponseType = ResponseType;
@@ -17,6 +21,7 @@ export default function TweetResponseList({
   tweetId,
   responses,
   responseCount,
+  currentUser,
 }: TweetResponseListProps) {
   const [state, reducerFn] = useOptimistic(
     { responses, responseCount },
@@ -35,8 +40,8 @@ export default function TweetResponseList({
       payload: response,
       created_at: new Date(),
       user: {
-        id: 0,
-        username: 'Me',
+        id: currentUser.id,
+        username: currentUser.username,
       },
     };
 

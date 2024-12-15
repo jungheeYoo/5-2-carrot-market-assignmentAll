@@ -90,6 +90,9 @@ async function getResponses(tweetId: number) {
         },
       },
     },
+    orderBy: {
+      created_at: 'desc',
+    },
   });
   const responseCount = await db.response.count({
     where: {
@@ -123,6 +126,20 @@ export default async function TweetPostDetail({
     return notFound();
   }
 
+  const currentUser = await db.user.findUnique({
+    where: {
+      id: sessionId,
+    },
+    select: {
+      id: true,
+      username: true,
+    },
+  });
+
+  if (!currentUser) {
+    return notFound();
+  }
+
   const tweet = await getCachedTweet(id);
   if (!tweet) {
     return notFound();
@@ -147,6 +164,7 @@ export default async function TweetPostDetail({
             tweetId={id}
             responses={responses}
             responseCount={responseCount}
+            currentUser={currentUser}
           />
         </div>
       </div>
