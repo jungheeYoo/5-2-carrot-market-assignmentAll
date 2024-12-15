@@ -43,6 +43,7 @@ export async function getSearchTweets(keyword: string) {
 
     return { data: tweets, error: null };
   } catch (e) {
+    console.error('Error fetching tweet:', e);
     return { data: null, error: 'Failed to fetch tweets' };
   }
 }

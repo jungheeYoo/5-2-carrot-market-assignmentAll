@@ -29,6 +29,7 @@ async function getTweet(id: number) {
     });
     return tweet;
   } catch (e) {
+    console.error('Error fetching tweet:', e);
     return null;
   }
 }

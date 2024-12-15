@@ -15,7 +15,9 @@ export async function likeTweet(tweetId: number) {
       },
     });
     revalidateTag(`like-status-${tweetId}`);
-  } catch (e) {}
+  } catch (e) {
+    console.error('Error fetching session:', e);
+  }
 }
 
 export async function dislikeTweet(tweetId: number) {
@@ -31,5 +33,7 @@ export async function dislikeTweet(tweetId: number) {
       },
     });
     revalidateTag(`like-status-${tweetId}`);
-  } catch (e) {}
+  } catch (e) {
+    console.error('Error fetching session:', e);
+  }
 }
