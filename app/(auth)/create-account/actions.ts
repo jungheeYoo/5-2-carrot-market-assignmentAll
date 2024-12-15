@@ -74,7 +74,7 @@ const formSchema = z
     path: ['confirmPassword'],
   });
 
-export async function createAccount(prevState: any, formData: FormData) {
+export async function createAccount(prevState: unknown, formData: FormData) {
   const data = {
     email: formData.get('email'),
     username: formData.get('username'),

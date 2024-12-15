@@ -1,12 +1,12 @@
 import TabBar from '@/components/tab-bar';
-import { getUserInfo } from './users/[username]/actions';
+import { getLoggedInUser } from './users/[username]/actions';
 
 export default async function TabLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const user = await getUserInfo();
+  const user = await getLoggedInUser();
   return (
     <div>
       {children}

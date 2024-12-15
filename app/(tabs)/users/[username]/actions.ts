@@ -1,8 +1,11 @@
+'use server';
+
 import db from '@/lib/db';
 import getSession from '@/lib/session';
+import { Prisma } from '@prisma/client';
 import { notFound } from 'next/navigation';
 
-export async function getUserInfo() {
+export async function getLoggedInUser() {
   const session = await getSession();
   if (session.id) {
     const user = await db.user.findUnique({
@@ -17,7 +20,7 @@ export async function getUserInfo() {
   notFound();
 }
 
-export async function getUser(username: string) {
+export async function getUserByUsername(username: string) {
   console.log('Username parameter:', username);
   const user = await db.user.findUnique({
     where: {
@@ -54,3 +57,7 @@ export async function getUser(username: string) {
 
   notFound();
 }
+
+export type InitialUserInfoType = Prisma.PromiseReturnType<
+  typeof getLoggedInUser
+>;

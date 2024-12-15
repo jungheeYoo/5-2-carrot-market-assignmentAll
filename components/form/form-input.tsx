@@ -7,6 +7,7 @@ interface FormInputProps {
   errors?: string[];
   icon?: ReactNode;
   name: string;
+  defaultValue?: string | null | undefined;
 }
 
 export default function FormInput({
@@ -16,6 +17,7 @@ export default function FormInput({
   errors = [],
   icon,
   name,
+  defaultValue,
 }: FormInputProps) {
   return (
     <div className="flex flex-col gap-2">
@@ -31,6 +33,7 @@ export default function FormInput({
           type={type}
           placeholder={placeholder}
           required={required}
+          defaultValue={defaultValue ?? undefined}
         />
       </div>
       {errors.map((error, index) => (

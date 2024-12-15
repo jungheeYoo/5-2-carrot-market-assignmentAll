@@ -1,4 +1,5 @@
-import { getUser } from './actions';
+import Link from 'next/link';
+import { getLoggedInUser, getUserByUsername } from './actions';
 import TweetPostItem from '@/components/tweet/tweet-post';
 
 export default async function User({
@@ -6,16 +7,24 @@ export default async function User({
 }: {
   params: { username: string };
 }) {
-  // console.log('Params:', params);
-  const user = await getUser(params.username);
+  const user = await getUserByUsername(params.username);
+  const userInfo = await getLoggedInUser();
 
   return (
     <div className="flex flex-col gap-5 *:w-full">
       <section className="mt-10 p-3 border-b border-neutral-700">
+        <div className="flex items-center justify-between gap-3">
+          <span className="text-xl font-bold">{user.username}</span>
+          {userInfo.username === user.username && (
+            <Link
+              href={`/users/${userInfo.username}/edit`}
+              className="p-2 border border-neutral-700 rounded-full text-sm hover:bg-[#d8d3ff] transition duration-300"
+            >
+              Edit Profile
+            </Link>
+          )}
+        </div>
         <ul>
-          <li>
-            <span className="text-xl font-bold">{user.username}</span>
-          </li>
           <li>
             <span>{user.email}</span>
           </li>
@@ -29,14 +38,14 @@ export default async function User({
       <section>
         <ul>
           {user.tweets?.map((tweet, index) => (
-            <li
+            <div
               key={tweet.id}
               className={`border-b border-neutral-200 ${
                 index === user.tweets.length - 1 ? '' : 'pb-4'
               }`}
             >
               <TweetPostItem {...tweet} />
-            </li>
+            </div>
           ))}
         </ul>
       </section>
