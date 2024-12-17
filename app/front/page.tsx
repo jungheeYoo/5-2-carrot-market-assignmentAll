@@ -1,5 +1,5 @@
+import { pacifico } from '@/lib/fonts';
 import Link from 'next/link';
-import { pacifico } from '../layout';
 
 export default function FrontPage() {
   return (
