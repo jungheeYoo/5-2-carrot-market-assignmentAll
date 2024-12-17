@@ -13,7 +13,7 @@ export default async function User({
 
   return (
     <div className="flex flex-col gap-5 *:w-full">
-      <section className="text-end mt-10">
+      <section className="text-end">
         <Profile />
       </section>
       <section className="mt-10 p-3 border-b border-neutral-700">
@@ -22,7 +22,7 @@ export default async function User({
           {userInfo.username === user.username && (
             <Link
               href={`/users/${userInfo.username}/edit`}
-              className="bg-[#d8d3ff] p-2 border border-neutral-700 rounded-full text-sm hover:bg-[#d8d3ff94] transition"
+              className=" p-2 bg-neutral-900 text-white rounded-full text-sm hover:text-[#d7acc6] transition-all duration-300 ease-in-out disabled:bg-neutral-200"
             >
               Edit Profile
             </Link>
@@ -45,7 +45,9 @@ export default async function User({
             <div
               key={tweet.id}
               className={`border-b border-neutral-200 ${
-                index === user.tweets.length - 1 ? '' : 'pb-4'
+                index === user.tweets.length - 1
+                  ? 'border-none'
+                  : 'border-b border-neutral-200'
               }`}
             >
               <TweetPostItem {...tweet} />

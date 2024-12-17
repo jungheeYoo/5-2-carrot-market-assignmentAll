@@ -13,7 +13,7 @@ export default function AddTweet() {
           name="tweet"
           required
           placeholder="What’s happening?"
-          className="w-full p-5 rounded-md resize-none"
+          className="w-full h-28 p-4 rounded-md resize-none"
         />
         {state?.fieldErrors?.tweet && (
           <span className="text-red-400">{state.fieldErrors.tweet}</span>

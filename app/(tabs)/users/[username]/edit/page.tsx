@@ -13,7 +13,7 @@ export default async function EditProfile({
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50">
+    <div className="flex flex-col items-center h-screen bg-[#f0f0f0] mt-40">
       <h2>
         <span className="font-bold text-lg">{userInfo.username}🌱</span>
       </h2>

@@ -6,7 +6,14 @@ const config: Config = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
-  theme: {},
+  theme: {
+    extend: {
+      fontFamily: {
+        bebas: ['Bebas Neue', 'sans-serif'],
+        pacifico: ['Pacifico', 'cursive'],
+      },
+    },
+  },
   plugins: [],
 };
 export default config;

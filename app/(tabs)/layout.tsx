@@ -8,8 +8,8 @@ export default async function TabLayout({
 }) {
   const user = await getLoggedInUser();
   return (
-    <div>
-      {children}
+    <div className="flex-1 flex flex-col overflow-hidden">
+      <div className="flex-1 overflow-hidden">{children}</div>
       <TabBar username={user.username} />
     </div>
   );

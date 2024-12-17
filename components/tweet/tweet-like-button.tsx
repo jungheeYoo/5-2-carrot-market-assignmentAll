@@ -40,10 +40,10 @@ export default function LikeButton({
   return (
     <button
       onClick={onClick}
-      className={`flex items-center justify-center text-neutral-500 text-sm border border-neutral-500 rounded-full p-2 ml-[550px] transition-colors ${
+      className={`flex items-center justify-center text-neutral-500 text-sm border border-neutral-500 rounded-full p-2 ml-[525px] transition-colors ${
         state.isLiked
-          ? 'bg-[#d8d3ff] text-white border-[#d8d3ff]'
-          : 'hover:bg-[#d8d3ff]'
+          ? 'bg-neutral-900 text-white rounded-full text-sm hover:text-[#d7acc6] transition-all duration-300 ease-in-out'
+          : 'hover:bg-[#d7acc6] transition-all duration-300 ease-in-out text-neutral-900'
       }`}
     >
       {state.isLiked ? (
@@ -54,7 +54,7 @@ export default function LikeButton({
       {state.isLiked ? (
         <span>{state.likeCount}</span>
       ) : (
-        <span className="w-8">like</span>
+        <span className="w-16">like</span>
       )}
     </button>
   );

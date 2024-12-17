@@ -42,28 +42,35 @@ export default function TweetPostList({ initialTweets }: TweetPostListProps) {
   };
 
   return (
-    <div className="p-5 flex flex-col gap-5">
-      <div>
+    <div className="h-full flex flex-col">
+      <div className="flex-1 overflow-y-auto">
         {tweets.map((tweet) => (
           <TweetPostItem key={tweet.id} {...tweet} />
         ))}
       </div>
-
-      <ul className="flex flex-row gap-5 justify-end items-center">
-        <li>
-          <button onClick={handlePrevClick} disabled={page === 0 || isLoading}>
-            &lt;
-          </button>
-        </li>
-        <li>
-          <span className="font-medium">{`${page + 1}`}</span>
-        </li>
-        <li>
-          <button onClick={handleNextClick} disabled={!isLoadable || isLoading}>
-            &gt;
-          </button>
-        </li>
-      </ul>
+      <div className="flex-shrink-0 p-5">
+        <ul className="flex flex-row gap-5 justify-end items-center">
+          <li>
+            <button
+              onClick={handlePrevClick}
+              disabled={page === 0 || isLoading}
+            >
+              &lt;
+            </button>
+          </li>
+          <li>
+            <span className="font-medium">{page + 1}</span>
+          </li>
+          <li>
+            <button
+              onClick={handleNextClick}
+              disabled={!isLoadable || isLoading}
+            >
+              &gt;
+            </button>
+          </li>
+        </ul>
+      </div>
     </div>
   );
 }

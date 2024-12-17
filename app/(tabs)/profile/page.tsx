@@ -27,9 +27,9 @@ export default async function Profile() {
   };
   return (
     <div>
-      <h1>Welcome back, We missed you! {user?.username}!</h1>
+      <h1>Welcome back! {user?.username}😊</h1>
       <form action={logOut}>
-        <button>Log out</button>
+        <button className="hover:underline">Log out</button>
       </form>
     </div>
   );

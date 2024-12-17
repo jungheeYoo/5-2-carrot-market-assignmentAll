@@ -4,6 +4,7 @@ import { InitialUserInfoType } from '@/app/(tabs)/users/[username]/actions';
 import FormInput from './form-input';
 import { editProfile } from '@/app/(tabs)/users/[username]/edit/actions';
 import { useFormState } from 'react-dom';
+import FormButton from './form-btn';
 
 type FormState = {
   formErrors: string[];
@@ -32,7 +33,7 @@ export default function FormEditProfile({
   return (
     <form
       action={dispatch}
-      className="flex flex-col gap-y-4 w-full max-w-lg mx-auto "
+      className="flex flex-col gap-y-2 w-full max-w-lg mx-auto "
     >
       {state?.formErrors && state.formErrors.length > 0 && (
         <div className="text-red-500 mb-4">
@@ -85,12 +86,7 @@ export default function FormEditProfile({
         defaultValue={initialUserInfo.bio}
       />
 
-      <button
-        type="submit"
-        className="bg-[#d8d3ff] text-white rounded-full w-full h-12 mt-4 hover:bg-[#d8d3ff94] transition"
-      >
-        Modify
-      </button>
+      <FormButton text="Modify" />
     </form>
   );
 }

@@ -16,7 +16,7 @@ import {
 export default function TabBar({ username }: { username: string }) {
   const pathname = usePathname();
   return (
-    <div className="fixed bottom-0 w-full mx-auto max-w-screen-sm grid grid-cols-3 px-3 py-3 *:text-balc bg-[#d8d3ff]">
+    <section className="flex-shrink-0 w-full mx-auto grid grid-cols-3 px-3 py-3 *:text-balc bg-[#f0f0f0] border-t border-neutral-300 ">
       <Link href="/" className="flex flex-col items-center gap-px">
         {pathname === '/' ? (
           <SolidHomeIcon className="w-7 h-7" />
@@ -44,6 +44,6 @@ export default function TabBar({ username }: { username: string }) {
         )}
         <span>user</span>
       </Link>
-    </div>
+    </section>
   );
 }

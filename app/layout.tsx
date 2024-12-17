@@ -1,8 +1,14 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import { Pacifico } from 'next/font/google';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
+
+export const pacifico = Pacifico({
+  weight: '400',
+  subsets: ['latin'],
+});
 
 export const metadata: Metadata = {
   title: {
@@ -20,9 +26,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} bg-white text-neutral-900 max-w-screen-sm mx-auto`}
+        className={`${inter.className} bg-[#d7acc6] text-neutral-900 flex flex-col max-w-screen-sm mx-auto h-screen`}
       >
-        {children}
+        <div className="flex-1 flex flex-col overflow-hidden">
+          <div className="flex-1 flex flex-col overflow-hidden bg-[#f0f0f0] p-5">
+            {children}
+          </div>
+        </div>
       </body>
     </html>
   );

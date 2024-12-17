@@ -67,12 +67,12 @@ export default function TweetResponseList({
         <input type="hidden" name="tweetId" value={tweetId} />
         <textarea
           name="response"
-          className="w-full p-2 border rounded"
+          className="w-full p-2 border rounded resize-none"
           placeholder="Write a comment..."
         />
         <button
           type="submit"
-          className="self-end px-6 py-2 w-full bg-[#d8d3ff] text-white rounded-md"
+          className="self-end px-6 py-2 w-full bg-neutral-900 text-white rounded-full h-14 hover:text-[#d7acc6] transition-all duration-300 ease-in-out "
         >
           Add Comment
         </button>

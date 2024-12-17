@@ -5,9 +5,13 @@ import { getInitialTweets } from '@/lib/tweet';
 export default async function Home() {
   const initialTweets = await getInitialTweets();
   return (
-    <div>
-      <AddTweet />
-      <TweetPostList initialTweets={initialTweets} />
-    </div>
+    <main className="flex flex-col flex-1">
+      <div className="flex-shrink-0">
+        <AddTweet />
+      </div>
+      <div className="flex-1 overflow-hidden">
+        <TweetPostList initialTweets={initialTweets} />
+      </div>
+    </main>
   );
 }
